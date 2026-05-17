@@ -1,0 +1,193 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
+    "environmentName": {
+      "type": "string",
+      "defaultValue": "dev",
+      "allowedValues": ["dev", "test", "prod"]
+    },
+    "adminUsername": {
+      "type": "string",
+      "defaultValue": "azureuser"
+    },
+    "adminPassword": {
+      "type": "securestring"
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_B1s",
+      "allowedValues": ["Standard_B1s", "Standard_B2s"]
+    }
+  },
+  "variables": {
+    "resourcePrefix": "[concat('lab2-', parameters('environmentName'))]",
+    "vnetName": "[concat(variables('resourcePrefix'), '-vnet')]",
+    "webSubnetName": "web-subnet",
+    "appSubnetName": "app-subnet",
+    "dbSubnetName": "db-subnet",
+    "webNsgName": "[concat(variables('resourcePrefix'), '-web-nsg')]",
+    "appNsgName": "[concat(variables('resourcePrefix'), '-app-nsg')]",
+    "dbNsgName": "[concat(variables('resourcePrefix'), '-db-nsg')]",
+    "webVmName": "[concat(variables('resourcePrefix'), '-web-vm')]",
+    "appVmName": "[concat(variables('resourcePrefix'), '-app-vm')]",
+    "dbVmName": "[concat(variables('resourcePrefix'), '-db-vm')]",
+    "publicIpName": "[concat(variables('resourcePrefix'), '-web-pip')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-09-01",
+      "name": "[variables('webNsgName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-HTTP",
+            "properties": {
+              "priority": 1000,
+              "protocol": "Tcp",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "80"
+            }
+          },
+          {
+            "name": "Allow-SSH",
+            "properties": {
+              "priority": 1001,
+              "protocol": "Tcp",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "22"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-09-01",
+      "name": "[variables('appNsgName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-App-From-Web",
+            "properties": {
+              "priority": 1000,
+              "protocol": "Tcp",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "10.0.1.0/24",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "8080"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2023-09-01",
+      "name": "[variables('dbNsgName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "Allow-MySQL-From-App",
+            "properties": {
+              "priority": 1000,
+              "protocol": "Tcp",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourceAddressPrefix": "10.0.2.0/24",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*",
+              "destinationPortRange": "3306"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2023-09-01",
+      "name": "[variables('vnetName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNsgName'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('appNsgName'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', variables('dbNsgName'))]"
+      ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": ["10.0.0.0/16"]
+        },
+        "subnets": [
+          {
+            "name": "[variables('webSubnetName')]",
+            "properties": {
+              "addressPrefix": "10.0.1.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNsgName'))]"
+              }
+            }
+          },
+          {
+            "name": "[variables('appSubnetName')]",
+            "properties": {
+              "addressPrefix": "10.0.2.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('appNsgName'))]"
+              }
+            }
+          },
+          {
+            "name": "[variables('dbSubnetName')]",
+            "properties": {
+              "addressPrefix": "10.0.3.0/24",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('dbNsgName'))]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2023-09-01",
+      "name": "[variables('publicIpName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Static"
+      }
+    }
+  ],
+  "outputs": {
+    "virtualNetworkName": {
+      "type": "string",
+      "value": "[variables('vnetName')]"
+    },
+    "webPublicIpResourceName": {
+      "type": "string",
+      "value": "[variables('publicIpName')]"
+    }
+  }
+}
+
