@@ -1,0 +1,19 @@
+dn: cn=helpdesk-role,ou=Groups,dc=lab,dc=local
+objectClass: posixGroup
+cn: helpdesk-role
+gidNumber: 11001
+memberUid: agarcia
+
+dn: cn=manager-role,ou=Groups,dc=lab,dc=local
+objectClass: posixGroup
+cn: manager-role
+gidNumber: 11002
+memberUid: mjohnson
+memberUid: rbrown
+
+dn: cn=readonly-role,ou=Groups,dc=lab,dc=local
+objectClass: posixGroup
+cn: readonly-role
+gidNumber: 11003
+memberUid: swilson
+memberUid: llee

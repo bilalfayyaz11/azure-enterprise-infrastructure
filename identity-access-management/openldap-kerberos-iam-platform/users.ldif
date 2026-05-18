@@ -1,0 +1,83 @@
+dn: uid=jsmith,ou=People,dc=lab,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: John Smith
+sn: Smith
+uid: jsmith
+uidNumber: 20001
+gidNumber: 10001
+homeDirectory: /home/jsmith
+loginShell: /bin/bash
+mail: jsmith@lab.local
+userPassword: AdminPass123!
+
+dn: uid=agarcia,ou=People,dc=lab,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Ana Garcia
+sn: Garcia
+uid: agarcia
+uidNumber: 20002
+gidNumber: 10001
+homeDirectory: /home/agarcia
+loginShell: /bin/bash
+mail: agarcia@lab.local
+userPassword: AdminPass123!
+
+dn: uid=mjohnson,ou=People,dc=lab,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Mike Johnson
+sn: Johnson
+uid: mjohnson
+uidNumber: 20003
+gidNumber: 10002
+homeDirectory: /home/mjohnson
+loginShell: /bin/bash
+mail: mjohnson@lab.local
+userPassword: AdminPass123!
+
+dn: uid=swilson,ou=People,dc=lab,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Sarah Wilson
+sn: Wilson
+uid: swilson
+uidNumber: 20004
+gidNumber: 10002
+homeDirectory: /home/swilson
+loginShell: /bin/bash
+mail: swilson@lab.local
+userPassword: AdminPass123!
+
+dn: uid=rbrown,ou=People,dc=lab,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Robert Brown
+sn: Brown
+uid: rbrown
+uidNumber: 20005
+gidNumber: 10003
+homeDirectory: /home/rbrown
+loginShell: /bin/bash
+mail: rbrown@lab.local
+userPassword: AdminPass123!
+
+dn: uid=llee,ou=People,dc=lab,dc=local
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Linda Lee
+sn: Lee
+uid: llee
+uidNumber: 20006
+gidNumber: 10003
+homeDirectory: /home/llee
+loginShell: /bin/bash
+mail: llee@lab.local
+userPassword: AdminPass123!

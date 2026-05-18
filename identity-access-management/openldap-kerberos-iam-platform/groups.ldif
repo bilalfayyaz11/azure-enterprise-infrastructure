@@ -1,0 +1,19 @@
+dn: cn=it-department,ou=Groups,dc=lab,dc=local
+objectClass: posixGroup
+cn: it-department
+gidNumber: 10001
+
+dn: cn=hr-department,ou=Groups,dc=lab,dc=local
+objectClass: posixGroup
+cn: hr-department
+gidNumber: 10002
+
+dn: cn=finance-department,ou=Groups,dc=lab,dc=local
+objectClass: posixGroup
+cn: finance-department
+gidNumber: 10003
+
+dn: cn=administrators,ou=Groups,dc=lab,dc=local
+objectClass: posixGroup
+cn: administrators
+gidNumber: 10004
