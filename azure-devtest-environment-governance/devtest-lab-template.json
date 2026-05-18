@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "labName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.DevTestLab/labs",
+      "apiVersion": "2018-09-15",
+      "name": "[parameters('labName')]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "Environment": "Testing",
+        "Purpose": "DevOps"
+      },
+      "properties": {}
+    }
+  ]
+}

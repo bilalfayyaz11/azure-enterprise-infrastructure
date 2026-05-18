@@ -1,0 +1,22 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
+  "title": "Install Node.js on Linux",
+  "description": "Installs Node.js LTS and npm on Linux systems",
+  "tags": [
+    "Linux",
+    "Node.js",
+    "Development"
+  ],
+  "targetOsType": "Linux",
+  "parameters": {
+    "nodeVersion": {
+      "type": "string",
+      "displayName": "Node.js Version",
+      "description": "Version of Node.js to install",
+      "defaultValue": "20.x"
+    }
+  },
+  "runCommand": {
+    "commandToExecute": "[concat('bash install-nodejs.sh ', parameters('nodeVersion'))]"
+  }
+}
