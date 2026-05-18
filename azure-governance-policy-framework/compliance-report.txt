@@ -1,0 +1,43 @@
+=== Azure Governance Compliance Report ===
+Generated on: Mon May 18 03:58:46 UTC 2026
+
+=== Subscription ===
+EnvironmentName    HomeTenantId                          IsDefault    Name                  State    TenantDefaultDomain                  TenantDisplayName    TenantId
+-----------------  ------------------------------------  -----------  --------------------  -------  -----------------------------------  -------------------  ------------------------------------
+AzureCloud         470d102a-8bb1-4d77-aafb-049f8cc4002e  True         Azure subscription 1  Enabled  bilalfayyaz180gmail.onmicrosoft.com  Default Directory    470d102a-8bb1-4d77-aafb-049f8cc4002e
+
+=== Resource Group ===
+Location    Name
+----------  -------------
+eastus      rg-policy-lab
+
+=== Policy Definitions ===
+Column1                         Column2                               Column3
+------------------------------  ------------------------------------  ---------
+require-storage-tls12           Require TLS 1.2 for Storage Accounts  Custom
+require-https-storage           Require HTTPS for Storage Accounts    Custom
+require-environment-owner-tags  Require Environment and Owner Tags    Custom
+
+=== Policy Assignments ===
+DefinitionVersion    DisplayName                        EnforcementMode    Name                      PolicyDefinitionId                                                                                                                      ResourceGroup    Scope
+-------------------  ---------------------------------  -----------------  ------------------------  --------------------------------------------------------------------------------------------------------------------------------------  ---------------  --------------------------------------------------------------------------------
+1.*.*                HTTPS Storage Policy Assignment    Default            https-storage-assignment  /subscriptions/758010cd-a4e4-40d4-8985-7b568ec169c1/providers/Microsoft.Authorization/policyDefinitions/require-https-storage           rg-policy-lab    /subscriptions/758010cd-a4e4-40d4-8985-7b568ec169c1/resourceGroups/rg-policy-lab
+1.*.*                Tagging Policy Assignment          Default            tagging-assignment        /subscriptions/758010cd-a4e4-40d4-8985-7b568ec169c1/providers/Microsoft.Authorization/policyDefinitions/require-environment-owner-tags  rg-policy-lab    /subscriptions/758010cd-a4e4-40d4-8985-7b568ec169c1/resourceGroups/rg-policy-lab
+1.*.*                TLS 1.2 Storage Policy Assignment  Default            tls12-storage-assignment  /subscriptions/758010cd-a4e4-40d4-8985-7b568ec169c1/providers/Microsoft.Authorization/policyDefinitions/require-storage-tls12           rg-policy-lab    /subscriptions/758010cd-a4e4-40d4-8985-7b568ec169c1/resourceGroups/rg-policy-lab
+
+=== Deployed Resources ===
+Name                  ResourceGroup    Location    Type                               Status
+--------------------  ---------------  ----------  ---------------------------------  ---------
+goodstore535822269    rg-policy-lab    eastus      Microsoft.Storage/storageAccounts  Succeeded
+securestore746316029  rg-policy-lab    eastus      Microsoft.Storage/storageAccounts  Succeeded
+
+=== Storage Security Configuration ===
+Name                  HTTPS    TLS     BlobPublicAccess    Environment    Owner
+--------------------  -------  ------  ------------------  -------------  -------
+goodstore535822269    True     TLS1_0  False               Development    Bilal
+securestore746316029  True     TLS1_2  False               Development    Bilal
+
+=== Policy Compliance State ===
+
+
+=== End of Report ===
