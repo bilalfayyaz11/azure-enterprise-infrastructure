@@ -1,0 +1,38 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# Azure Monitoring Operations Workbook\n\nThis workbook tracks application health, error rate, latency, and service-level trends using Log Analytics queries."
+      },
+      "name": "overview"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "ApplicationEvents_CL\n| summarize EventCount=count() by bin(TimeGenerated, 5m)\n| render timechart",
+        "size": 0,
+        "title": "Application Event Volume",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "event-volume"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "ApplicationEvents_CL\n| where StatusCode_d >= 500\n| summarize ErrorCount=count() by ServiceName_s\n| render barchart",
+        "size": 0,
+        "title": "Errors by Service",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "errors-by-service"
+    }
+  ],
+  "isLocked": false,
+  "fallbackResourceIds": []
+}

@@ -1,0 +1,10 @@
+// High response time alert condition
+ApplicationEvents_CL
+| summarize AvgResponseTimeMs=avg(ResponseTimeMs_d) by bin(TimeGenerated, 5m)
+| where AvgResponseTimeMs > 800
+
+// High error count alert condition
+ApplicationEvents_CL
+| where StatusCode_d >= 500
+| summarize ErrorCount=count() by bin(TimeGenerated, 5m), ServiceName_s
+| where ErrorCount >= 2

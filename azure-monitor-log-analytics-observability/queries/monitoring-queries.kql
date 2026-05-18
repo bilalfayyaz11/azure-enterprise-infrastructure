@@ -1,0 +1,21 @@
+// Recent application events
+ApplicationEvents_CL
+| order by TimeGenerated desc
+| take 20
+
+// Error count by service
+ApplicationEvents_CL
+| where StatusCode_d >= 500
+| summarize ErrorCount=count() by ServiceName_s
+| order by ErrorCount desc
+
+// Average response time by service
+ApplicationEvents_CL
+| summarize AvgResponseTimeMs=avg(ResponseTimeMs_d) by ServiceName_s
+| order by AvgResponseTimeMs desc
+
+// Slow requests over 800ms
+ApplicationEvents_CL
+| where ResponseTimeMs_d > 800
+| project TimeGenerated, ServiceName_s, StatusCode_d, ResponseTimeMs_d, Message_s
+| order by ResponseTimeMs_d desc

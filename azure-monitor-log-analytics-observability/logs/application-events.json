@@ -1,0 +1,5 @@
+{"TimeGenerated":"2026-05-18T09:00:00Z","ServiceName":"checkout-api","Environment":"production","StatusCode":200,"ResponseTimeMs":145,"Message":"Request completed successfully"}
+{"TimeGenerated":"2026-05-18T09:01:00Z","ServiceName":"checkout-api","Environment":"production","StatusCode":200,"ResponseTimeMs":180,"Message":"Request completed successfully"}
+{"TimeGenerated":"2026-05-18T09:02:00Z","ServiceName":"checkout-api","Environment":"production","StatusCode":500,"ResponseTimeMs":920,"Message":"Database timeout detected"}
+{"TimeGenerated":"2026-05-18T09:03:00Z","ServiceName":"orders-api","Environment":"production","StatusCode":200,"ResponseTimeMs":210,"Message":"Order processed"}
+{"TimeGenerated":"2026-05-18T09:04:00Z","ServiceName":"orders-api","Environment":"production","StatusCode":503,"ResponseTimeMs":1250,"Message":"Upstream service unavailable"}
