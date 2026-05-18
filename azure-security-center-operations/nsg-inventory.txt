@@ -1,0 +1,5 @@
+Location    Name              ProvisioningState    ResourceGroup    ResourceGuid
+----------  ----------------  -------------------  ---------------  ------------------------------------
+eastus      lab2-dev-app-nsg  Succeeded            lab2-rg          dd8fd996-20bf-4e98-87ed-46b85bc39544
+eastus      lab2-dev-db-nsg   Succeeded            lab2-rg          7651cf4b-c883-4b50-8e01-cb1c494a1b1f
+eastus      lab2-dev-web-nsg  Succeeded            lab2-rg          98f6d337-a533-449d-a7f7-ce6d0e4503ae

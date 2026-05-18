@@ -1,0 +1,54 @@
+# Azure Defender for Cloud Security Review
+
+## Environment Summary
+- Azure subscription was accessible through Azure CLI.
+- Defender for Cloud / Security Center review was performed through Azure portal.
+- Existing Azure resources were inspected using Azure CLI.
+- Resource group reviewed: lab2-rg.
+- Existing resources included virtual network, public IP address, and network security groups.
+- No virtual machines were present in the lab subscription.
+
+## Security Resources Reviewed
+- lab2-dev-web-nsg
+- lab2-dev-app-nsg
+- lab2-dev-db-nsg
+- lab2-dev-vnet
+- lab2-dev-web-pip
+
+## VM / JIT Access Blocker
+The lab required a virtual machine for Just-In-Time access configuration and alert simulation.
+However, no VM existed in the subscription.
+
+A replacement VM deployment was attempted using Standard_B1s in eastus, but Azure returned a SkuNotAvailable capacity restriction.
+
+Additional SKU checks were performed in:
+- eastus
+- eastus2
+- centralus
+
+All checks returned no unrestricted VM SKUs, which blocked VM creation and prevented live JIT testing.
+
+## Remediation Actions Completed
+- Azure CLI installed and verified.
+- Existing Azure resource groups inspected.
+- Network security groups inventoried.
+- NSG rule sets exported for review.
+- VM availability issue identified and documented.
+- Modern Linux networking command replacement identified: ss instead of netstat.
+- Incident response checklist prepared for future alert investigation.
+
+## Security Recommendations
+- Restrict inbound administrative access to known IP ranges only.
+- Avoid broad inbound rules such as 0.0.0.0/0 for SSH or RDP.
+- Enable Just-In-Time VM access when VM capacity becomes available.
+- Enable Defender for Cloud recommendations and monitor Secure Score regularly.
+- Configure alert notifications for high-severity security events.
+- Maintain incident response runbooks for suspicious login attempts, port scans, and web attack indicators.
+
+## Troubleshooting Log
+1. Azure CLI was missing initially and had to be installed.
+2. nmap and apache2 were missing initially and had to be installed.
+3. No virtual machines existed in the lab environment.
+4. VM creation failed because Standard_B1s was unavailable in eastus.
+5. Multiple region SKU checks returned no available VM sizes.
+6. JIT access could not be tested because JIT requires an existing Azure VM.

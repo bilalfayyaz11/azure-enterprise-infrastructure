@@ -1,0 +1,4 @@
+Name        ResourceGroup    Priority    SourcePortRanges    SourceAddressPrefixes    SourceASG    Access    Protocol    Direction    DestinationPortRanges    DestinationAddressPrefixes    DestinationASG
+----------  ---------------  ----------  ------------------  -----------------------  -----------  --------  ----------  -----------  -----------------------  ----------------------------  ----------------
+Allow-HTTP  lab2-rg          1000        *                   *                        None         Allow     Tcp         Inbound      80                       *                             None
+Allow-SSH   lab2-rg          1001        *                   *                        None         Allow     Tcp         Inbound      22                       *                             None
